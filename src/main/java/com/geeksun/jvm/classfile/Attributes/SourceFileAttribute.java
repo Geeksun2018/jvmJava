@@ -7,17 +7,13 @@ public class SourceFileAttribute implements AttributeInfo{
     private ConstantPool constantPool;
     private int sourceFileIndex;
 
-    public SourceFileAttribute(ConstantPool constantPool){
+    public SourceFileAttribute(ClassReader classReader, ConstantPool constantPool){
         this.constantPool = constantPool;
-    }
-
-    @Override
-    public void readInfo(ClassReader classReader) {
         this.sourceFileIndex = classReader.nextU2toInteger();
     }
 
     public String getFileName(){
-        return "";
+        return constantPool.getUtf8(sourceFileIndex);
     }
 
 }

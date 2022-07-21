@@ -1,7 +1,9 @@
 package com.geeksun.jvm.classfile.ConstantPool;
 
 import com.geeksun.jvm.classfile.ClassReader;
+import lombok.Getter;
 
+@Getter
 public class ConstantNameAndTypeInfo implements ConstantInfo{
     private int nameIndex;
     private int descriptorIndex;

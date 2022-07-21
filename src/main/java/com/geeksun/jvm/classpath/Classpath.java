@@ -17,7 +17,7 @@ public class Classpath {
         if (Objects.equals(cpOption, "")) {
             cpOption = ".";
         }
-        userClasspathEntry = new WildcardEntry(cpOption);
+        userClasspathEntry = Entry.getProperEntry(cpOption);
     }
 
     private void parseBootAndExtClasspath(String jreOption){

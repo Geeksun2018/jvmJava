@@ -1,6 +1,8 @@
 package com.geeksun.jvm;
 
-public class ClassTest {
+import com.geeksun.jvm.classpath.EntryInterface;
+
+public class ClassTest implements EntryInterface {
     private String str;
     private int a = 123456;
 
@@ -13,4 +15,8 @@ public class ClassTest {
     }
 
 
+    @Override
+    public byte[] readClass(String className) {
+        return new byte[0];
+    }
 }

@@ -56,11 +56,11 @@ public interface ConstantInfo {
             case CONSTANT_Class:
                 return new ConstantClassInfo(classReader);
             case CONSTANT_FieldRef:
-                return new ConstantFieldRefInfo(classReader);
+                return new ConstantFieldRefInfo(constantPool, classReader);
             case  CONSTANT_MethodRef:
-                return new ConstantMethodRefInfo(classReader);
+                return new ConstantMethodRefInfo(constantPool, classReader);
             case CONSTANT_InterfaceMethodRef:
-                return new ConstantInterfaceMethodRefInfo(classReader);
+                return new ConstantInterfaceMethodRefInfo(constantPool, classReader);
             case CONSTANT_NameAndType:
                 return new ConstantNameAndTypeInfo(classReader);
 //            case CONSTANT_MethodType:

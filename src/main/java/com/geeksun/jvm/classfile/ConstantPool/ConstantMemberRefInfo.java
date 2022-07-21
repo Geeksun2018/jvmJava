@@ -7,9 +7,18 @@ public class ConstantMemberRefInfo implements ConstantInfo{
     private int classIndex;
     private int nameAndTypeIndex;
 
-    public ConstantMemberRefInfo(ClassReader classReader){
+    public ConstantMemberRefInfo(ConstantPool constantPool, ClassReader classReader){
+        this.constantPool = constantPool;
         this.classIndex = classReader.nextU2toInteger();
         this.nameAndTypeIndex = classReader.nextU2toInteger();
+    }
+
+    public String getClassName(){
+        return this.constantPool.getClassName(classIndex);
+    }
+
+    public String getNameAndDescriptor(){
+        return this.constantPool.getNameAndType(nameAndTypeIndex);
     }
 
     @Override

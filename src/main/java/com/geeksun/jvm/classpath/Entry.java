@@ -4,7 +4,7 @@ import java.io.File;
 
 public abstract class Entry implements EntryInterface {
 
-    protected final String pathListSeparator = ";";
+    protected static final String pathListSeparator = ";";
     protected String absolutePath;
 
     public Entry(String path){
@@ -32,8 +32,16 @@ public abstract class Entry implements EntryInterface {
     }
 
     public static Entry getProperEntry(String path){
-        // TODO: 2022/7/13
-        return null;
+        if(path.contains(pathListSeparator)){
+            return new CompositeEntry(path);
+        }
+        if(path.endsWith("*")){
+            return new WildcardEntry(path);
+        }
+        if(path.endsWith("jar")||path.endsWith("JAR")||path.endsWith("zip")||path.endsWith("ZIP")){
+            return new ZipEntry(path);
+        }
+        return new DirEntry(path);
     }
 
 }

@@ -1,12 +1,15 @@
 package com.geeksun.jvm.classfile;
 
 import com.geeksun.jvm.classfile.Attributes.AttributeInfo;
+import com.geeksun.jvm.classfile.ConstantPool.ConstantInfo;
 import com.geeksun.jvm.classfile.ConstantPool.ConstantPool;
 import com.geeksun.jvm.classfile.ConstantPool.MemberInfo;
+import lombok.Getter;
 
+@Getter
 public class ClassFile {
 
-    private int magic;
+//    private int magic;
     private int minorVersion;
     private int majorVersion;
     private ConstantPool constantPool;
@@ -23,17 +26,21 @@ public class ClassFile {
         ClassReader classReader = new ClassReader(classData);
         readAndCheckMagic(classReader);
         readAndCheckVersion(classReader);
-        this.constantPool = readConstantPool(classReader);
+        this.constantPool = new ConstantPool(classReader);
+        this.accessFlags = classReader.nextU2toInteger();
+        this.thisClass = classReader.nextU2toInteger();
+        this.superClass = classReader.nextU2toInteger();
+        this.interfaces = classReader.nextUint16s();
+        this.fields = MemberInfo.readMembers(classReader, constantPool);
+        this.methods = MemberInfo.readMembers(classReader, constantPool);
+        this.attributes = AttributeInfo.readAttributes(classReader, constantPool);
     }
 
-    private ConstantPool readConstantPool(ClassReader classReader) {
-        return null;
-    }
 
     private void readAndCheckVersion(ClassReader classReader) {
         this.minorVersion = classReader.nextU2toInteger();
-         this.majorVersion = classReader.nextU2toInteger();
-         switch (this.majorVersion){
+        this.majorVersion = classReader.nextU2toInteger();
+        switch (this.majorVersion){
              case 45:
                  break;
              case 46:
@@ -47,15 +54,31 @@ public class ClassFile {
                      return;
                  }
 
-         }
+        }
         System.out.println("java.lang.UnsupportedClassVersionError!");
     }
 
     public void readAndCheckMagic(ClassReader classReader){
-        magic = classReader.nextU4toInteger();
-        if(magic != 0xCAFEBABE) {
+        String magic = classReader.nextU4ToHexString();
+        if(!"cafebabe".equals(magic)) {
             System.out.println("java.lang.classFormatError: magic!");
         }
+    }
+
+    public String getClassName(){
+        return constantPool.getClassName(superClass);
+    }
+
+    public String getSuperClassName(){
+        return constantPool.getClassName(this.superClass);
+    }
+
+    public String[] getInterfaceNames(){
+        String[] names = new String[this.interfaces.length];
+        for(int i = 0;i < interfaces.length;i++){
+            names[i] = constantPool.getClassName(interfaces[i]);
+        }
+        return names;
     }
 
 

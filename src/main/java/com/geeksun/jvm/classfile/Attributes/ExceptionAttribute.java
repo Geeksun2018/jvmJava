@@ -5,9 +5,7 @@ import com.geeksun.jvm.classfile.ClassReader;
 public class ExceptionAttribute implements AttributeInfo{
     private int[] exceptionIndexTable;
 
-
-    @Override
-    public void readInfo(ClassReader classReader) {
+    public ExceptionAttribute(ClassReader classReader){
         this.exceptionIndexTable = classReader.nextUint16s();
     }
 

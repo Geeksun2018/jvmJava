@@ -4,8 +4,8 @@ import com.geeksun.jvm.classfile.ClassReader;
 
 public class ConstantInterfaceMethodRefInfo extends ConstantMemberRefInfo{
 
-    public ConstantInterfaceMethodRefInfo(ClassReader classReader){
-        super(classReader);
+    public ConstantInterfaceMethodRefInfo(ConstantPool constantPool, ClassReader classReader){
+        super(constantPool, classReader);
     }
 
 }

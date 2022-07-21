@@ -8,13 +8,9 @@ public class UnparsedAttributeInfo implements AttributeInfo {
     private int length;
     private byte[] info;
 
-    public UnparsedAttributeInfo(String name, int length){
+    public UnparsedAttributeInfo(ClassReader classReader, String name, int length){
         this.name = name;
         this.length = length;
-    }
-
-    @Override
-    public void readInfo(ClassReader classReader) {
         this.info = classReader.readBytes(length);
     }
 

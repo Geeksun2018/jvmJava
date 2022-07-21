@@ -7,8 +7,7 @@ import lombok.AllArgsConstructor;
 public class LineNumberTableAttribute implements AttributeInfo{
     private LineNumberTableEntry[] lineNumberTable;
 
-    @Override
-    public void readInfo(ClassReader classReader) {
+    public LineNumberTableAttribute(ClassReader classReader) {
         int lineNumberTableLength = classReader.nextU2toInteger();
         this.lineNumberTable = new LineNumberTableEntry[lineNumberTableLength];
         for(int i = 0;i < lineNumberTableLength;i++){

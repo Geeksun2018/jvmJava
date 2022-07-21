@@ -3,6 +3,8 @@ package com.geeksun.jvm.classfile.ConstantPool;
 import com.geeksun.jvm.classfile.Attributes.AttributeInfo;
 import com.geeksun.jvm.classfile.ClassReader;
 
+import static com.geeksun.jvm.classfile.Attributes.AttributeInfo.readAttributes;
+
 public class MemberInfo {
 
     private ConstantPool cp;
@@ -13,19 +15,23 @@ public class MemberInfo {
 
     public MemberInfo(ClassReader classReader, ConstantPool constantPool){
         cp = constantPool;
-        accessFlags = classReader.nextU4toInteger();
-        nameIndex = classReader.nextU4toInteger();
-        descriptorIndex = classReader.nextU4toInteger();
-//        attributeInfos = readAttributes(classReader, constantPool);
+        accessFlags = classReader.nextU2toInteger();
+        nameIndex = classReader.nextU2toInteger();
+        descriptorIndex = classReader.nextU2toInteger();
+        attributeInfos = readAttributes(classReader, constantPool);
     }
 
-    public MemberInfo[] readMembers(ClassReader classReader, ConstantPool constantPool){
-        int memberCount = classReader.nextU4toInteger();
+    public static MemberInfo[] readMembers(ClassReader classReader, ConstantPool constantPool){
+        int memberCount = classReader.nextU2toInteger();
         MemberInfo[] memberInfos = new MemberInfo[memberCount];
         for(int i = 0;i < memberCount;i++){
             memberInfos[i] = new MemberInfo(classReader, constantPool);
         }
         return memberInfos;
+    }
+
+    public String getName(){
+        return cp.getUtf8(nameIndex);
     }
 
 }

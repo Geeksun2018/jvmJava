@@ -12,16 +12,15 @@ public class CodeAttribute implements AttributeInfo{
     private ExceptionTableEntry[] exceptionTable;
     private AttributeInfo[] attributeInfos;
 
-
-    @Override
-    public void readInfo(ClassReader classReader) {
+    public CodeAttribute(ClassReader classReader, ConstantPool constantPool){
         this.maxStack = classReader.nextU2toInteger();
         this.maxLocals = classReader.nextU2toInteger();
-        int codeLength = classReader.nextU2toInteger();
+        int codeLength = classReader.nextU4toInteger();
         this.code = classReader.readBytes(codeLength);
         this.exceptionTable = readExceptionTable(classReader);
-//        this.attributeInfos = AttributeInfo.readAttribute(classReader, constantPool);
+        this.attributeInfos = AttributeInfo.readAttributes(classReader, constantPool);
     }
+
 
     private ExceptionTableEntry[] readExceptionTable(ClassReader classReader){
         int exceptionTableLength = classReader.nextU2toInteger();
