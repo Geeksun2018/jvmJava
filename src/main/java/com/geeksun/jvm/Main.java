@@ -3,6 +3,7 @@ package com.geeksun.jvm;
 import com.geeksun.jvm.classfile.ClassFile;
 import com.geeksun.jvm.classfile.ConstantPool.MemberInfo;
 import com.geeksun.jvm.classpath.Classpath;
+import com.geeksun.jvm.rtda.Frame;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -48,14 +49,17 @@ public class Main {
         }
     }
 
-    public static void startJVM(Cmd cmd){
-        Classpath cp = new Classpath(cmd.getXjreOption(), cmd.getCpOption());
-        System.out.printf("classpath:%s class:%s args:%s", cp, cmd.getClassName(), String.join(" ", cmd.getArgs()));
 
-        String className = cmd.getClassName().replace(".", "/");
-        ClassFile classFile = new ClassFile(cp.readClass(className));
-        System.out.println(cmd.getClassName());
-        printClassInfo(classFile);
+    public static void startJVM(Cmd cmd){
+        Frame frame = new Frame(100, 100);
+//        Classpath cp = new Classpath(cmd.getXjreOption(), cmd.getCpOption());
+//        System.out.printf("classpath:%s class:%s args:%s", cp, cmd.getClassName(), String.join(" ", cmd.getArgs()));
+//
+//        String className = cmd.getClassName().replace(".", "/");
+//        ClassFile classFile = new ClassFile(cp.readClass(className));
+//        System.out.println(cmd.getClassName());
+//        printClassInfo(classFile);
+
 //        byte[] data = cp.readClass(className);
 //        if(data == null){
 //            System.out.printf("Could not find or load main class %s%n", cmd.getClassName());

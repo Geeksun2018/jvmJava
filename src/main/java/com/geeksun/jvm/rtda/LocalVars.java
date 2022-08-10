@@ -6,6 +6,9 @@ public class LocalVars {
     public LocalVars(int maxLocals){
         if(maxLocals > 0){
             localVars = new Slot[maxLocals];
+            for(int i = 0;i < maxLocals;i++){
+                localVars[i] = new Slot();
+            }
         }
     }
 
@@ -27,7 +30,31 @@ public class LocalVars {
     }
 
     public void setLong(int index, long val){
+        setInt(index, (int)val);
+        setInt(index + 1, (int)(val >> 32));
+    }
 
+    public long getLong(int index){
+        long low = getInt(index)&0x0000000ffffffffL;
+        long high = (getInt(index + 1)&0x0000000ffffffffL) << 32;
+        return low|high;
+    }
+
+    public void setDouble(int index, double val){
+        long v = Double.doubleToLongBits(val);
+        setLong(index, v);
+    }
+
+    public Double getDouble(int index){
+        return Double.longBitsToDouble(getLong(index));
+    }
+
+    public void setRef(int index, Object object){
+        localVars[index].setRef(object);
+    }
+
+    public Object getRef(int index){
+        return localVars[index].getRef();
     }
 
 }

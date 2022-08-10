@@ -1,0 +1,20 @@
+package com.geeksun.jvm.instructions.math;
+
+import com.geeksun.jvm.instructions.base.NoOperandsInstruction;
+import com.geeksun.jvm.rtda.Frame;
+import com.geeksun.jvm.rtda.OperandStack;
+
+public class DMul extends NoOperandsInstruction {
+    @Override
+    public int getOpCode() {
+        return 0x6b;
+    }
+
+    @Override
+    public void execute(Frame frame) {
+        OperandStack stack = frame.getOperandStack();
+        double v2 = stack.popDouble();
+        double v1 = stack.popDouble();
+        stack.pushDouble(v1 * v2);
+    }
+}

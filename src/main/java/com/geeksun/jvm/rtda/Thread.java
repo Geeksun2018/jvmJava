@@ -1,5 +1,10 @@
 package com.geeksun.jvm.rtda;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Thread {
     private int pc;
     private JvmStack stack;
