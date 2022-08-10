@@ -4,7 +4,7 @@ import com.geeksun.jvm.instructions.base.NoOperandsInstruction;
 import com.geeksun.jvm.rtda.Frame;
 import com.geeksun.jvm.rtda.OperandStack;
 
-public class LCmp extends NoOperandsInstruction {
+public class Lcmp extends NoOperandsInstruction {
     @Override
     public int getOpCode() {
         return 0x94;

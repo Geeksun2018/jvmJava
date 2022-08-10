@@ -1,11 +1,11 @@
-package com.geeksun.jvm.instructions.Stack;
+package com.geeksun.jvm.instructions.stack;
 
 import com.geeksun.jvm.instructions.base.NoOperandsInstruction;
 import com.geeksun.jvm.rtda.Frame;
 import com.geeksun.jvm.rtda.OperandStack;
 import com.geeksun.jvm.rtda.Slot;
 
-public class Dup2_x1 extends NoOperandsInstruction {
+public class Dup2_x2 extends NoOperandsInstruction {
     @Override
     public int getOpCode() {
         return 0x5d;
@@ -17,9 +17,11 @@ public class Dup2_x1 extends NoOperandsInstruction {
         Slot slot1 = stack.popSlot();
         Slot slot2 = stack.popSlot();
         Slot slot3 = stack.popSlot();
+        Slot slot4 = stack.popSlot();
 
         stack.pushSlot(slot2);
         stack.pushSlot(slot1);
+        stack.pushSlot(slot4);
         stack.pushSlot(slot3);
         stack.pushSlot(slot2);
         stack.pushSlot(slot1);

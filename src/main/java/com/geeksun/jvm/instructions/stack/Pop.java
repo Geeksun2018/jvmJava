@@ -1,4 +1,4 @@
-package com.geeksun.jvm.instructions.Stack;
+package com.geeksun.jvm.instructions.stack;
 
 import com.geeksun.jvm.instructions.base.NoOperandsInstruction;
 import com.geeksun.jvm.rtda.Frame;
