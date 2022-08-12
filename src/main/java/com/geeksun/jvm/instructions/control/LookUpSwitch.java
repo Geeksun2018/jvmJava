@@ -6,36 +6,37 @@ import com.geeksun.jvm.rtda.Frame;
 import com.geeksun.jvm.rtda.OperandStack;
 import com.geeksun.jvm.rtda.Thread;
 
-public class TableSwitch extends BranchInstruction {
+public class LookUpSwitch extends BranchInstruction {
 
     private int defaultOffset;
-    private int low;
-    private int high;
-    private int[] jumpOffsets;
+    private int nPairs;
+    private int[] matchOffsets;
 
     @Override
     public int getOpCode() {
-        return 0xaa;
+        return 0xab;
     }
 
     @Override
     public void fetchOperands(BytecodeReader reader) {
         reader.skipPadding();
-        low = reader.readUint32();
-        high = reader.readUint32();
-        jumpOffsets = reader.readUint32s(high - low + 1);
+        defaultOffset = reader.readUint32();
+        nPairs = reader.readUint32();
+        matchOffsets = reader.readUint32s(nPairs * 2);
     }
 
     @Override
     public void execute(Frame frame) {
         OperandStack stack = frame.getOperandStack();
-        int index = stack.popInt();
-        if(index >= low && index <= high){
-            offset = jumpOffsets[index - low];
-        }else{
-            offset = defaultOffset;
-        }
         Thread thread = frame.getThread();
-        thread.setPc(offset);
+        int key = stack.popInt();
+        for(int i = 0;i < nPairs * 2;i+=2){
+            if(matchOffsets[i] == key){
+                offset = matchOffsets[i + 1];
+                thread.setPc(offset);
+                return;
+            }
+        }
+        thread.setPc(defaultOffset);
     }
 }
