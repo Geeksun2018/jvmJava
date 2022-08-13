@@ -1,6 +1,7 @@
 package com.geeksun.jvm.classfile.ConstantPool;
 
 import com.geeksun.jvm.classfile.Attributes.AttributeInfo;
+import com.geeksun.jvm.classfile.Attributes.CodeAttribute;
 import com.geeksun.jvm.classfile.ClassReader;
 
 import static com.geeksun.jvm.classfile.Attributes.AttributeInfo.readAttributes;
@@ -32,6 +33,15 @@ public class MemberInfo {
 
     public String getName(){
         return cp.getUtf8(nameIndex);
+    }
+
+    public CodeAttribute getCodeAttribute(){
+        for(AttributeInfo attributeInfo:attributeInfos){
+            if(attributeInfo instanceof CodeAttribute){
+                return (CodeAttribute) attributeInfo;
+            }
+        }
+        return null;
     }
 
 }

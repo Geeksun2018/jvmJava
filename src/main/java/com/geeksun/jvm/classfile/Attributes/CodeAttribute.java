@@ -3,7 +3,11 @@ package com.geeksun.jvm.classfile.Attributes;
 import com.geeksun.jvm.classfile.ClassReader;
 import com.geeksun.jvm.classfile.ConstantPool.ConstantPool;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class CodeAttribute implements AttributeInfo{
     private ConstantPool constantPool;
     private int maxStack;

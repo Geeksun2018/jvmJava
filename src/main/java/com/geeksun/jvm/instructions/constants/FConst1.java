@@ -3,16 +3,14 @@ package com.geeksun.jvm.instructions.constants;
 import com.geeksun.jvm.instructions.base.NoOperandsInstruction;
 import com.geeksun.jvm.rtda.Frame;
 
-public class IConstM1 extends NoOperandsInstruction {
-
+public class FConst1 extends NoOperandsInstruction {
     @Override
     public int getOpCode() {
-        return 0x02;
+        return 0x0c;
     }
 
     @Override
     public void execute(Frame frame) {
-        frame.getOperandStack().pushInt(-1);
+        frame.getOperandStack().pushFloat(1.0f);
     }
-
 }
