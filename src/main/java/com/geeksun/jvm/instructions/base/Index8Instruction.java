@@ -12,7 +12,5 @@ public abstract class Index8Instruction implements Instruction {
     }
 
     @Override
-    public void execute(Frame frame) {
-
-    }
+    public abstract void execute(Frame frame);
 }

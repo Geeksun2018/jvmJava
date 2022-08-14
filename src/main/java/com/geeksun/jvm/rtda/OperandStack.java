@@ -56,7 +56,7 @@ public class OperandStack {
         return Double.longBitsToDouble(v);
     }
 
-    public void pushRef(Object ref){
+    public void pushRef(java.lang.Object ref){
         this.slots[size++].setRef(ref);
     }
 

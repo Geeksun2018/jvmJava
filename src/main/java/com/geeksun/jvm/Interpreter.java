@@ -23,15 +23,16 @@ public class Interpreter {
         Frame frame = thread.popFrame();
         BytecodeReader reader = new BytecodeReader(byteCode, frame.getNextPc());
         int opCode;
-        do{
-            int pc = frame.getNextPc();
-            thread.setPc(pc);
-            System.out.println("pc:" + reader.getPc());
-            reader.reset(byteCode, pc);
-            opCode = reader.readUint8();
-            System.out.println("opCode: " + opCode);
-//            Instruction instruction =
-        }
+//        do{
+//            int pc = frame.getNextPc();
+//            thread.setPc(pc);
+//            System.out.println("pc:" + reader.getPc());
+//            reader.reset(byteCode, pc);
+//            opCode = reader.readUint8();
+//            System.out.println("opCode: " + opCode);
+////            Instruction instruction =
+//        }
+        return;
     }
 
 }
