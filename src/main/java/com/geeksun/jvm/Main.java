@@ -49,22 +49,26 @@ public class Main {
         }
     }
 
+    public static MemberInfo getMainMethod(ClassFile classFile){
+        for(MemberInfo memberInfo:classFile.getMethods()){
+            if("main".equals(memberInfo.getName())&&"([Ljava/lang/String;)V".equals(memberInfo.getDescriptor())){
+                return memberInfo;
+            }
+        }
+        return null;
+    }
 
     public static void startJVM(Cmd cmd){
-        Frame frame = new Frame(100, 100);
-//        Classpath cp = new Classpath(cmd.getXjreOption(), cmd.getCpOption());
-//        System.out.printf("classpath:%s class:%s args:%s", cp, cmd.getClassName(), String.join(" ", cmd.getArgs()));
-//
-//        String className = cmd.getClassName().replace(".", "/");
-//        ClassFile classFile = new ClassFile(cp.readClass(className));
-//        System.out.println(cmd.getClassName());
-//        printClassInfo(classFile);
-
-//        byte[] data = cp.readClass(className);
-//        if(data == null){
-//            System.out.printf("Could not find or load main class %s%n", cmd.getClassName());
-//        }
-//        System.out.println("class data:" + Arrays.toString(data));
+        Classpath cp = new Classpath(cmd.getXjreOption(), cmd.getCpOption());
+        String className = cmd.getClassName().replace(".", "/");
+        ClassFile classFile = new ClassFile(cp.readClass(className));
+        MemberInfo mainMethod = getMainMethod(classFile);
+        Interpreter interpreter = new Interpreter();
+        if(mainMethod == null){
+            System.out.println("null main method");
+        }else{
+            interpreter.interpret(mainMethod);
+        }
 
     }
 

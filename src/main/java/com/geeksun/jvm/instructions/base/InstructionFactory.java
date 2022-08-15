@@ -21,7 +21,7 @@ public class InstructionFactory {
 
     private static Map<Integer, Instruction> codeMap = new HashMap<>();
 
-    private static Map<String, Instruction> nameMap = new HashMap<>();
+//    private static Map<String, Instruction> nameMap = new HashMap<>();
 
     static {
         putInstruction(new DCmpg());
@@ -216,9 +216,17 @@ public class InstructionFactory {
 
     }
 
+    public static Instruction getByOpCode(int opCode){
+        Instruction instruction = codeMap.get(opCode);
+        if(instruction == null){
+            System.out.println("no operation code!");
+        }
+        return instruction;
+    }
+
     private static void putInstruction(Instruction instruction){
         codeMap.put(instruction.getOpCode(), instruction);
-        nameMap.put(instruction.getReName(), instruction);
+//        nameMap.put(instruction.getReName(), instruction);
     }
 
 

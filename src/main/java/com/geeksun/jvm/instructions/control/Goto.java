@@ -12,7 +12,7 @@ public class Goto extends BranchInstruction {
 
     @Override
     public void fetchOperands(BytecodeReader reader) {
-        this.offset = reader.readUint16();
+        this.offset = reader.readInt16();
     }
 
     @Override

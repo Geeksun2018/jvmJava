@@ -20,29 +20,36 @@ public class BytecodeReader {
         this.pc = pc;
     }
 
-    public int readUint8(){
-        return Utils.byteToInteger(new byte[]{this.code[pc++]});
+    public int readInt8(){
+        int b1 = code[pc++];
+        return b1 & 0xff;
     }
 
-    public int readUint16(){
-        return Utils.byteToInteger(new byte[]{this.code[pc++], this.code[pc++]});
+    public int readInt16(){
+        int b1 = code[pc++];
+        int b2 = code[pc++];
+        return b1 << 8 | b2;
     }
 
-    public int readUint32(){
-        return Utils.byteToInteger(new byte[]{this.code[pc++], this.code[pc++], this.code[pc++], this.code[pc++]});
+    public int readInt32(){
+        int b1 = code[pc++];
+        int b2 = code[pc++];
+        int b3 = code[pc++];
+        int b4 = code[pc++];
+        return b1 << 24 | b2 << 16 | b3 << 8 | b4;
     }
 
-    public int[] readUint32s(int length){
+    public int[] readInt32s(int length){
         int[] res = new int[length];
         for(int i = 0;i < length;i++){
-            res[i] = readUint32();
+            res[i] = readInt32();
         }
         return res;
     }
 
     public void skipPadding(){
         while (pc % 4 != 0){
-            readUint8();
+            readInt8();
         }
     }
 

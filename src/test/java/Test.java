@@ -18,9 +18,9 @@ public class Test {
 
     @org.junit.Test
     public void startJVM(){
-        Frame frame = new Frame(100, 100);
-        testLocalVars(frame.getLocalVars());
-        testOperandStack(frame.getOperandStack());
+//        Frame frame = new Frame(100, 100);
+//        testLocalVars(frame.getLocalVars());
+//        testOperandStack(frame.getOperandStack());
     }
 
     public void testLocalVars(LocalVars localVars){

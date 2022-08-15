@@ -4,6 +4,7 @@ import com.geeksun.jvm.classfile.Attributes.CodeAttribute;
 import com.geeksun.jvm.classfile.ConstantPool.MemberInfo;
 import com.geeksun.jvm.instructions.base.BytecodeReader;
 import com.geeksun.jvm.instructions.base.Instruction;
+import com.geeksun.jvm.instructions.base.InstructionFactory;
 import com.geeksun.jvm.rtda.Frame;
 import com.geeksun.jvm.rtda.Thread;
 
@@ -17,22 +18,27 @@ public class Interpreter {
         Thread thread = new Thread();
         Frame frame = new Frame(thread, maxLocals, maxStack);
         thread.pushFrame(frame);
+        loop(thread, byteCode);
     }
 
     public void loop(Thread thread, byte[] byteCode){
         Frame frame = thread.popFrame();
         BytecodeReader reader = new BytecodeReader(byteCode, frame.getNextPc());
         int opCode;
-//        do{
-//            int pc = frame.getNextPc();
-//            thread.setPc(pc);
-//            System.out.println("pc:" + reader.getPc());
-//            reader.reset(byteCode, pc);
-//            opCode = reader.readUint8();
-//            System.out.println("opCode: " + opCode);
-////            Instruction instruction =
-//        }
-        return;
+        do{
+            int pc = frame.getNextPc();
+            thread.setPc(pc);
+            System.out.print("pc:" + reader.getPc());
+            reader.reset(byteCode, pc);
+            opCode = reader.readInt8();
+            System.out.print("        opCode: " + opCode);
+            Instruction instruction = InstructionFactory.getByOpCode(opCode);
+            instruction.fetchOperands(reader);
+            frame.setNextPc(reader.getPc());
+            instruction.execute(frame);
+            System.out.print("        op: " + instruction.getReName());
+            System.out.println("        localVars: " + frame.getLocalVars());
+        }while (opCode != 0xb1);
     }
 
 }

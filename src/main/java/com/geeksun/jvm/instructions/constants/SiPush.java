@@ -15,7 +15,7 @@ public class SiPush extends NoOperandsInstruction {
 
     @Override
     public void fetchOperands(BytecodeReader reader) {
-        val = reader.readUint16();
+        val = reader.readInt16();
     }
 
     @Override

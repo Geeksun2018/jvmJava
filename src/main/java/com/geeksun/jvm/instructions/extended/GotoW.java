@@ -12,7 +12,7 @@ public class GotoW extends BranchInstruction {
 
     @Override
     public void fetchOperands(BytecodeReader reader) {
-        offset = reader.readUint32();
+        offset = reader.readInt32();
     }
 
     @Override

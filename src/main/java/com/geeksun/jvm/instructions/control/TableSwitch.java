@@ -21,9 +21,9 @@ public class TableSwitch extends BranchInstruction {
     @Override
     public void fetchOperands(BytecodeReader reader) {
         reader.skipPadding();
-        low = reader.readUint32();
-        high = reader.readUint32();
-        jumpOffsets = reader.readUint32s(high - low + 1);
+        low = reader.readInt32();
+        high = reader.readInt32();
+        jumpOffsets = reader.readInt32s(high - low + 1);
     }
 
     @Override

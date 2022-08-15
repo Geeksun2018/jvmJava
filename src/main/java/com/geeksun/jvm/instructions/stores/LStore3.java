@@ -1,9 +1,10 @@
 package com.geeksun.jvm.instructions.stores;
 
 import com.geeksun.jvm.instructions.base.Index8Instruction;
+import com.geeksun.jvm.instructions.base.NoOperandsInstruction;
 import com.geeksun.jvm.rtda.Frame;
 
-public class LStore3 extends Index8Instruction {
+public class LStore3 extends NoOperandsInstruction {
 
     public int getOpCode(){
         return 0x42;

@@ -2,7 +2,6 @@ package com.geeksun.jvm.instructions.math;
 
 import com.geeksun.jvm.instructions.base.BytecodeReader;
 import com.geeksun.jvm.instructions.base.Index8Instruction;
-import com.geeksun.jvm.instructions.base.NoOperandsInstruction;
 import com.geeksun.jvm.rtda.Frame;
 import com.geeksun.jvm.rtda.LocalVars;
 
@@ -17,8 +16,8 @@ public class IInc extends Index8Instruction {
 
     @Override
     public void fetchOperands(BytecodeReader reader) {
-        this.index = reader.readUint8();
-        this.constantVal = reader.readUint8();
+        this.index = reader.readInt8();
+        this.constantVal = reader.readInt8();
     }
 
     @Override

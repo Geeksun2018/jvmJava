@@ -6,17 +6,10 @@ public abstract class Index16Instruction implements Instruction {
     private int index;
 
     @Override
-    public int getOpCode() {
-        return 0;
-    }
-
-    @Override
     public void fetchOperands(BytecodeReader reader) {
-        index = reader.readUint16();
+        index = reader.readInt16();
     }
 
     @Override
-    public void execute(Frame frame) {
-
-    }
+    public abstract void execute(Frame frame);
 }

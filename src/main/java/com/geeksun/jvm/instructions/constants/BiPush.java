@@ -8,8 +8,13 @@ public class BiPush extends NoOperandsInstruction {
     private int val;
 
     @Override
+    public int getOpCode() {
+        return 0x10;
+    }
+
+    @Override
     public void fetchOperands(BytecodeReader reader) {
-        val = reader.readUint8();
+        val = reader.readInt8();
     }
 
     @Override

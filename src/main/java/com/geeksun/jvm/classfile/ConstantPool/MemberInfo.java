@@ -35,6 +35,10 @@ public class MemberInfo {
         return cp.getUtf8(nameIndex);
     }
 
+    public String getDescriptor(){
+        return cp.getUtf8(descriptorIndex);
+    }
+
     public CodeAttribute getCodeAttribute(){
         for(AttributeInfo attributeInfo:attributeInfos){
             if(attributeInfo instanceof CodeAttribute){

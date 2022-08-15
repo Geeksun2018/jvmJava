@@ -1,16 +1,17 @@
 package com.geeksun.jvm.instructions.loads;
 
 import com.geeksun.jvm.instructions.base.Index8Instruction;
+import com.geeksun.jvm.instructions.base.NoOperandsInstruction;
 import com.geeksun.jvm.rtda.Frame;
 
-public class ILoad3 extends Index8Instruction {
+public class ILoad3 extends NoOperandsInstruction {
     public int getOpCode(){
-        return 0x21;
+        return 0x1d;
     }
 
     @Override
     public void execute(Frame frame) {
-        long val = frame.getLocalVars().getLong(2);
-        frame.getOperandStack().pushLong(val);
+        int val = frame.getLocalVars().getInt(3);
+        frame.getOperandStack().pushInt(val);
     }
 }

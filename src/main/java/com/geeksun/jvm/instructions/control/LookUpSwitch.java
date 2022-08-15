@@ -20,9 +20,9 @@ public class LookUpSwitch extends BranchInstruction {
     @Override
     public void fetchOperands(BytecodeReader reader) {
         reader.skipPadding();
-        defaultOffset = reader.readUint32();
-        nPairs = reader.readUint32();
-        matchOffsets = reader.readUint32s(nPairs * 2);
+        defaultOffset = reader.readInt32();
+        nPairs = reader.readInt32();
+        matchOffsets = reader.readInt32s(nPairs * 2);
     }
 
     @Override

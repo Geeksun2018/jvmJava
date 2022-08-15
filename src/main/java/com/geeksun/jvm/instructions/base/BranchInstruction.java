@@ -7,7 +7,7 @@ public abstract class BranchInstruction implements Instruction{
 
     @Override
     public void fetchOperands(BytecodeReader reader) {
-        offset = reader.readUint16();
+        offset = reader.readInt16();
     }
 
     @Override
@@ -15,6 +15,6 @@ public abstract class BranchInstruction implements Instruction{
 
     public void branch(Frame frame, int offset){
         int pc = frame.getThread().getPc();
-        frame.setNextPc(pc);
+        frame.setNextPc(pc + offset);
     }
 }

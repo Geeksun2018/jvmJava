@@ -16,7 +16,7 @@ public class Wide extends BranchInstruction {
 
     @Override
     public void fetchOperands(BytecodeReader reader) {
-        int opCode = reader.readUint8();
+        int opCode = reader.readInt8();
 //        switch (opCode){
 //            case 0x15:
 //

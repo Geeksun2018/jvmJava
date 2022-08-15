@@ -1,12 +1,13 @@
 package com.geeksun.jvm.instructions.stores;
 
 import com.geeksun.jvm.instructions.base.Index8Instruction;
+import com.geeksun.jvm.instructions.base.NoOperandsInstruction;
 import com.geeksun.jvm.rtda.Frame;
 
-public class IStore2 extends Index8Instruction {
+public class IStore2 extends NoOperandsInstruction {
     @Override
     public int getOpCode() {
-        return 0x36;
+        return 0x3d;
     }
 
     @Override

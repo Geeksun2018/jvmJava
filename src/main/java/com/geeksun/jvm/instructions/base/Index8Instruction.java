@@ -8,7 +8,7 @@ public abstract class Index8Instruction implements Instruction {
 
     @Override
     public void fetchOperands(BytecodeReader reader) {
-        index = reader.readUint8();
+        index = reader.readInt8();
     }
 
     @Override
