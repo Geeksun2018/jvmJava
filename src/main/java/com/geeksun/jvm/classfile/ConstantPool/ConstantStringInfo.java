@@ -10,7 +10,9 @@ public class ConstantStringInfo implements ConstantInfo{
         this.stringIndex = classReader.nextU2toInteger();
     }
 
-
+    public String getString(){
+        return constantPool.getUtf8(stringIndex);
+    }
     @Override
     public String getInfo() {
         return null;

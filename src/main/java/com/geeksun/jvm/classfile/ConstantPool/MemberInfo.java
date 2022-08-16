@@ -3,9 +3,12 @@ package com.geeksun.jvm.classfile.ConstantPool;
 import com.geeksun.jvm.classfile.Attributes.AttributeInfo;
 import com.geeksun.jvm.classfile.Attributes.CodeAttribute;
 import com.geeksun.jvm.classfile.ClassReader;
+import lombok.Getter;
+import lombok.Setter;
 
 import static com.geeksun.jvm.classfile.Attributes.AttributeInfo.readAttributes;
-
+@Getter
+@Setter
 public class MemberInfo {
 
     private ConstantPool cp;

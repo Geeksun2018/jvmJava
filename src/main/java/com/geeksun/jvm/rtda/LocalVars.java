@@ -1,5 +1,7 @@
 package com.geeksun.jvm.rtda;
 
+import com.geeksun.jvm.rtda.heap.Object;
+
 public class LocalVars {
     private Slot[] localVars;
 

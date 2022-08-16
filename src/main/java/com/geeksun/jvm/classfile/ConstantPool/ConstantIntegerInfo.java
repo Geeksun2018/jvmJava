@@ -1,7 +1,11 @@
 package com.geeksun.jvm.classfile.ConstantPool;
 
 import com.geeksun.jvm.classfile.ClassReader;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class ConstantIntegerInfo implements ConstantInfo{
 
     private int val;

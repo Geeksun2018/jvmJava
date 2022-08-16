@@ -1,5 +1,6 @@
 package com.geeksun.jvm.rtda;
 
+import com.geeksun.jvm.rtda.heap.Object;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -56,7 +57,7 @@ public class OperandStack {
         return Double.longBitsToDouble(v);
     }
 
-    public void pushRef(java.lang.Object ref){
+    public void pushRef(Object ref){
         this.slots[size++].setRef(ref);
     }
 

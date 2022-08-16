@@ -1,5 +1,6 @@
 package com.geeksun.jvm.rtda;
 
+import com.geeksun.jvm.rtda.heap.Object;
 import lombok.Getter;
 import lombok.Setter;
 
