@@ -15,4 +15,9 @@ public class ConstantClassInfo implements ConstantInfo{
     public String getInfo() {
         return null;
     }
+
+    public String getName(){
+        return constantPool.getUtf8(this.nameIndex);
+    }
+
 }
