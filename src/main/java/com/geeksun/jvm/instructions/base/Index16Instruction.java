@@ -3,7 +3,7 @@ package com.geeksun.jvm.instructions.base;
 import com.geeksun.jvm.rtda.Frame;
 
 public abstract class Index16Instruction implements Instruction {
-    private int index;
+    protected int index;
 
     @Override
     public void fetchOperands(BytecodeReader reader) {

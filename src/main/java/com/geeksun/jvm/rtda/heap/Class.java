@@ -1,8 +1,8 @@
 package com.geeksun.jvm.rtda.heap;
 
 import com.geeksun.jvm.classfile.ClassFile;
-import com.geeksun.jvm.classfile.ConstantPool.ConstantPool;
 import com.geeksun.jvm.classfile.ConstantPool.MemberInfo;
+import com.geeksun.jvm.rtda.LocalVars;
 import com.geeksun.jvm.rtda.Slot;
 import com.sun.org.apache.bcel.internal.generic.PUSH;
 import lombok.Getter;
@@ -24,16 +24,24 @@ public class Class {
     private Class superClass;
     private Class[] interfaces;
     private int instanceSlotCount;
-    private Slot[] staticVars;
+    private int staticSlotCount;
+    private LocalVars staticVars;
 
     Class(ClassFile classFile){
         this.accessFlags = classFile.getAccessFlags();
         this.name = classFile.getClassName();
         this.superClassName = classFile.getSuperClassName();
         this.interfaceNames = classFile.getInterfaceNames();
-        this.constantPool = classFile.getConstantPool();
-//        this.fields =
-//        this.methods =
+        this.constantPool = new ConstantPool(this, classFile.getConstantPool().getConstantInfos());
+        MemberInfo[] fieldInfos = classFile.getFields();
+        this.fields = new Field[fieldInfos.length];
+        MemberInfo[] methodInfos = classFile.getMethods();
+        for(int i = 0;i < fieldInfos.length;i++){
+            this.fields[i] = new Field(this, fieldInfos[i]);
+        }
+        for(int i = 0;i < methodInfos.length;i++){
+            this.methods[i] = new Method(this, methodInfos[i]);
+        }
     }
 
     public boolean isPublic(){
@@ -70,10 +78,6 @@ public class Class {
 
     public ConstantPool getConstantPool(){
         return this.constantPool;
-    }
-
-    public Slot[] getStaticVars(){
-        return this.staticVars;
     }
 
     public String getPackageName(){

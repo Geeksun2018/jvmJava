@@ -1,19 +1,18 @@
+import com.geeksun.jvm.Interpreter;
 import com.geeksun.jvm.rtda.Frame;
 import com.geeksun.jvm.rtda.LocalVars;
 import com.geeksun.jvm.rtda.OperandStack;
 import org.omg.CORBA.PRIVATE_MEMBER;
 
+import java.sql.SQLOutput;
+
 public class Test {
 
     @org.junit.Test
     public void HexTest(){
-        long a = Long.MAX_VALUE;
-        int num1 = (int)a;
-        int num2 = (int)(a >> 32);
-
-        long l1 = (num2 & 0x00000000ffffffffL) << 32;
-        long l2 = num1 & 0x00000000ffffffffL;
-        System.out.println(((long)l1|l2) == a);
+        Object o = 1;
+        System.out.println(o instanceof Integer);
+        System.out.println(o.getClass().getName());
     }
 
     @org.junit.Test

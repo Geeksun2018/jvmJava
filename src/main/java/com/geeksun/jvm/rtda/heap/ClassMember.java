@@ -5,6 +5,8 @@ import com.geeksun.jvm.classfile.ConstantPool.MemberInfo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 public class ClassMember {
@@ -18,6 +20,19 @@ public class ClassMember {
         this.name = memberInfo.getName();
         this.descriptor = memberInfo.getDescriptor();
         this._class = _class;
+    }
+
+    public boolean isAccessibleTo(Class c){
+        if(isPublic()){
+            return true;
+        }
+        if(isProtected()){
+            return c == this._class||c.isSubClassOf(this._class)|| Objects.equals(c.getPackageName(), this._class.getPackageName());
+        }
+        if(!isPrivate()){
+            return c.getPackageName().equals(this._class.getPackageName());
+        }
+        return c == this._class;
     }
 
     public boolean isPublic(){

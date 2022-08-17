@@ -4,15 +4,15 @@ import com.geeksun.jvm.instructions.base.Index16Instruction;
 import com.geeksun.jvm.rtda.Frame;
 import com.geeksun.jvm.rtda.LocalVars;
 import com.geeksun.jvm.rtda.OperandStack;
-import com.geeksun.jvm.rtda.heap.Class;
 import com.geeksun.jvm.rtda.heap.ConstantPool;
 import com.geeksun.jvm.rtda.heap.Field;
 import com.geeksun.jvm.rtda.heap.FieldRef;
+import com.geeksun.jvm.rtda.heap.Object;
 
-public class GetStatic extends Index16Instruction {
+public class GetField extends Index16Instruction {
     @Override
     public int getOpCode() {
-        return 0xb2;
+        return 0xb4;
     }
 
     @Override
@@ -20,14 +20,19 @@ public class GetStatic extends Index16Instruction {
         ConstantPool constantPool = frame.getMethod().getClassMember().get_class().getConstantPool();
         FieldRef fieldRef = (FieldRef) constantPool.getConstant(index);
         Field field = fieldRef.resolveField();
-        Class aClass = field.getClassMember().get_class();
-        if(!field.getClassMember().isStatic()){
+
+        if(field.getClassMember().isStatic()){
             System.out.println("java.lang.IncompatibleClassChangeError");
+        }
+        OperandStack stack = frame.getOperandStack();
+        Object ref = stack.popRef();
+        if(ref == null){
+            System.out.println("java.lang.NullPointerException");
         }
         String descriptor = field.getClassMember().getDescriptor();
         int slotId = field.getSlotId();
-        LocalVars slots = aClass.getStaticVars();
-        OperandStack stack = frame.getOperandStack();
+        assert ref != null;
+        LocalVars slots = ref.getFields();
         switch (descriptor.charAt(0)){
             case 'Z':
             case 'B':
@@ -48,9 +53,8 @@ public class GetStatic extends Index16Instruction {
             case 'L':
             case '[':
                 stack.pushRef(slots.getRef(slotId));
-                break;
             default:
-                break;
+                // todo
         }
     }
 }

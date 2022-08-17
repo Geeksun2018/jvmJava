@@ -13,6 +13,6 @@ public class IStore0 extends NoOperandsInstruction {
     @Override
     public void execute(Frame frame) {
         int val = frame.getOperandStack().popInt();
-        frame.getLocalVars().setRef(0, val);
+        frame.getLocalVars().setLong(0, val);
     }
 }

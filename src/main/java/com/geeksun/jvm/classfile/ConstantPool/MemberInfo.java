@@ -2,6 +2,7 @@ package com.geeksun.jvm.classfile.ConstantPool;
 
 import com.geeksun.jvm.classfile.Attributes.AttributeInfo;
 import com.geeksun.jvm.classfile.Attributes.CodeAttribute;
+import com.geeksun.jvm.classfile.Attributes.ConstantValueAttribute;
 import com.geeksun.jvm.classfile.ClassReader;
 import lombok.Getter;
 import lombok.Setter;
@@ -46,6 +47,15 @@ public class MemberInfo {
         for(AttributeInfo attributeInfo:attributeInfos){
             if(attributeInfo instanceof CodeAttribute){
                 return (CodeAttribute) attributeInfo;
+            }
+        }
+        return null;
+    }
+
+    public ConstantValueAttribute getConstantValueAttribute(){
+        for(AttributeInfo attributeInfo:attributeInfos){
+            if(attributeInfo instanceof ConstantValueAttribute){
+                return (ConstantValueAttribute) attributeInfo;
             }
         }
         return null;

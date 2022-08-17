@@ -13,6 +13,6 @@ public class FStore1 extends NoOperandsInstruction {
     @Override
     public void execute(Frame frame) {
         float val = frame.getOperandStack().popFloat();
-        frame.getLocalVars().setRef(1, val);
+        frame.getLocalVars().setFloat(1, val);
     }
 }

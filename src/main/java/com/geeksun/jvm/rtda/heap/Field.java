@@ -1,5 +1,6 @@
 package com.geeksun.jvm.rtda.heap;
 
+import com.geeksun.jvm.classfile.Attributes.ConstantValueAttribute;
 import com.geeksun.jvm.classfile.ConstantPool.MemberInfo;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,16 @@ public class Field {
     private ClassMember classMember;
     private int constValueIndex;
     private int slotId;
+
+    Field(Class aClass, MemberInfo memberInfo){
+        classMember = new ClassMember(memberInfo, aClass);
+        ConstantValueAttribute attribute = memberInfo.getConstantValueAttribute();
+        if(attribute != null){
+            this.constValueIndex = attribute.getConstantValueIndex();
+        }else {
+            System.out.println("ConstantValueAttribute null");
+        }
+    }
 
     public static Field[] getFields(Class _class, MemberInfo[] cfFields){
         Field[] fields = new Field[cfFields.length];

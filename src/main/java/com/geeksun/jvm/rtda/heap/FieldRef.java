@@ -15,10 +15,39 @@ public class FieldRef {
         memberRef.getSymRef().setCp(constantPool);
     }
 
-
-    public void resolveFieldRef(){
-
+    public Field resolveField(){
+        if(this.field == null){
+            resolveFieldRef();
+        }
+        return this.field;
     }
 
+    public void resolveFieldRef(){
+        Class d = this.memberRef.getSymRef().getCp().get_class();
+        Class c = this.memberRef.getSymRef().resolveClass();
+        Field f = lookupField(c, memberRef.getName(), memberRef.getDescriptor());
+        if(f == null){
+            System.out.println("java.lang.NoSuchFieldError");
+        }
+        assert f != null;
+        if(!f.getClassMember().isAccessibleTo(d)){
+            System.out.println("java.lang.IllegalAccessError");
+        }
+        this.field = f;
+    }
+    public Field lookupField(Class c, String name, String descriptor){
+        for(Field field1:c.getFields()){
+            if(field1.getClassMember().getName().equals((name))&&field1.getClassMember().getDescriptor().equals(descriptor)){
+                return field1;
+            }
+        }
+        for(Class face:c.getInterfaces()){
+            return lookupField(face, name, descriptor);
+        }
+        if(c.getSuperClass()!=null){
+            return lookupField(c.getSuperClass(), name, descriptor);
+        }
+        return null;
+    }
 
 }

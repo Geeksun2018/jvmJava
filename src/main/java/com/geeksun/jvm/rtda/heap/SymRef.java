@@ -20,11 +20,19 @@ public class SymRef {
     }
 
     public Class resolveClass(){
-        return null;
+        if(this._class == null){
+            resolveClassRef();
+        }
+        return this._class;
     }
 
     public void resolveClassRef(){
-
+        Class d = this.cp.get_class();
+       Class c = d.getClassLoader().loadClass(this.className);
+       if(!c.isAccessibleTo(d)){
+           System.out.println("java.lang.IllegalAccessError");
+       }
+       this._class = c;
     }
 
 

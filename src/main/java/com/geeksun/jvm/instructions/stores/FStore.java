@@ -12,6 +12,6 @@ public class FStore extends Index8Instruction {
     @Override
     public void execute(Frame frame) {
         float val = frame.getOperandStack().popFloat();
-        frame.getLocalVars().setRef(index, val);
+        frame.getLocalVars().setFloat(index, val);
     }
 }

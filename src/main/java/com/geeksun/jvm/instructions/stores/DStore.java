@@ -12,6 +12,6 @@ public class DStore extends Index8Instruction {
     @Override
     public void execute(Frame frame) {
         double val = frame.getOperandStack().popDouble();
-        frame.getLocalVars().setRef(index, val);
+        frame.getLocalVars().setDouble(index, val);
     }
 }

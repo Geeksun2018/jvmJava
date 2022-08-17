@@ -2,6 +2,7 @@ package com.geeksun.jvm.instructions.stores;
 
 import com.geeksun.jvm.instructions.base.NoOperandsInstruction;
 import com.geeksun.jvm.rtda.Frame;
+import com.geeksun.jvm.rtda.heap.Object;
 
 public class AStore0 extends NoOperandsInstruction {
     @Override

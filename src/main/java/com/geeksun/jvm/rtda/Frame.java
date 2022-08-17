@@ -1,5 +1,6 @@
 package com.geeksun.jvm.rtda;
 
+import com.geeksun.jvm.rtda.heap.Method;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,8 @@ public class Frame {
     private LocalVars localVars;
     private OperandStack operandStack;
     private Thread thread;
+
+    private Method method;
 
     private int nextPc;
 

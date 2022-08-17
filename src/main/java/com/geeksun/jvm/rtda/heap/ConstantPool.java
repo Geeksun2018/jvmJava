@@ -11,24 +11,33 @@ public class ConstantPool {
     java.lang.Object[] constants;
 
     public ConstantPool(Class _class, ConstantInfo[] constantInfos){
+
         int cpCount = constantInfos.length;
         this.constants = new java.lang.Object[cpCount];
         this._class = _class;
         for(int i = 0;i < cpCount;i++){
-            if(constantInfos[i] instanceof ConstantIntegerInfo){
-                constants[i] = ((ConstantIntegerInfo) constantInfos[i]).getVal();
-            } else if (constantInfos[i] instanceof ConstantFloatInfo) {
-                constants[i] = ((ConstantFloatInfo) constantInfos[i]).getVal();
-            }else if(constantInfos[i] instanceof ConstantLongInfo){
-                constants[i] = ((ConstantLongInfo) constantInfos[i]).getVal();
-            }else if(constantInfos[i] instanceof ConstantDoubleInfo){
-                constants[i] = ((ConstantDoubleInfo) constantInfos[i]).getVal();
-            }else if(constantInfos[i] instanceof ConstantStringInfo){
-                constants[i] = ((ConstantStringInfo) constantInfos[i]).getString();
-            }else if(constantInfos[i] instanceof ConstantClassInfo){
-//                constants[i] = constantInfos[i].
-            }
+//            if(constantInfos[i] instanceof ConstantIntegerInfo){
+//                constants[i] = ((ConstantIntegerInfo) constantInfos[i]).getVal();
+//            } else if (constantInfos[i] instanceof ConstantFloatInfo) {
+//                constants[i] = ((ConstantFloatInfo) constantInfos[i]).getVal();
+//            }else if(constantInfos[i] instanceof ConstantLongInfo){
+//                constants[i] = ((ConstantLongInfo) constantInfos[i]).getVal();
+//            }else if(constantInfos[i] instanceof ConstantDoubleInfo){
+//                constants[i] = ((ConstantDoubleInfo) constantInfos[i]).getVal();
+//            }else if(constantInfos[i] instanceof ConstantStringInfo){
+//                constants[i] = ((ConstantStringInfo) constantInfos[i]).getString();
+//            }else if(constantInfos[i] instanceof ConstantClassInfo){
+////                constants[i] = constantInfos[i].
         }
+        return;
+
+    }
+
+    public java.lang.Object getConstant(int index){
+        if(constants[index] == null){
+            System.out.println("No constants at index " + index);
+        }
+        return constants[index];
     }
 
 }

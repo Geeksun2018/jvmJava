@@ -2,6 +2,7 @@ package com.geeksun.jvm.instructions.stores;
 
 import com.geeksun.jvm.instructions.base.Index8Instruction;
 import com.geeksun.jvm.rtda.Frame;
+import com.geeksun.jvm.rtda.heap.Object;
 
 public class AStore extends Index8Instruction {
     @Override

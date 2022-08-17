@@ -13,6 +13,6 @@ public class DStore3 extends NoOperandsInstruction {
     @Override
     public void execute(Frame frame) {
         double val = frame.getOperandStack().popDouble();
-        frame.getLocalVars().setRef(3, val);
+        frame.getLocalVars().setDouble(3, val);
     }
 }

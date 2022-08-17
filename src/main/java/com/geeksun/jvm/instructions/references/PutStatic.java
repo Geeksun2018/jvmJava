@@ -4,25 +4,30 @@ import com.geeksun.jvm.instructions.base.Index16Instruction;
 import com.geeksun.jvm.rtda.Frame;
 import com.geeksun.jvm.rtda.LocalVars;
 import com.geeksun.jvm.rtda.OperandStack;
+import com.geeksun.jvm.rtda.heap.*;
 import com.geeksun.jvm.rtda.heap.Class;
-import com.geeksun.jvm.rtda.heap.ConstantPool;
-import com.geeksun.jvm.rtda.heap.Field;
-import com.geeksun.jvm.rtda.heap.FieldRef;
 
-public class GetStatic extends Index16Instruction {
+public class PutStatic extends Index16Instruction {
     @Override
     public int getOpCode() {
-        return 0xb2;
+        return 0xb3;
     }
 
     @Override
     public void execute(Frame frame) {
-        ConstantPool constantPool = frame.getMethod().getClassMember().get_class().getConstantPool();
+        Method currentMethod = frame.getMethod();
+        Class currentClass = currentMethod.getClassMember().get_class();
+        ConstantPool constantPool = currentClass.getConstantPool();
         FieldRef fieldRef = (FieldRef) constantPool.getConstant(index);
         Field field = fieldRef.resolveField();
         Class aClass = field.getClassMember().get_class();
         if(!field.getClassMember().isStatic()){
             System.out.println("java.lang.IncompatibleClassChangeError");
+        }
+        if(field.getClassMember().isFinal()){
+            if(currentClass != aClass||currentMethod.getClassMember().getName().equals("<clinit>")){
+                System.out.println("java.lang.IllegalAccessError");
+            }
         }
         String descriptor = field.getClassMember().getDescriptor();
         int slotId = field.getSlotId();
@@ -34,23 +39,25 @@ public class GetStatic extends Index16Instruction {
             case 'C':
             case 'S':
             case 'I':
-                stack.pushInt(slots.getInt(slotId));
+                slots.setInt(slotId, stack.popInt());
                 break;
             case 'F':
-                stack.pushFloat(slots.getFloat(slotId));
+                slots.setFloat(slotId, stack.popFloat());
                 break;
             case 'J':
-                stack.pushLong(slots.getLong(slotId));
+                slots.setLong(slotId, stack.popLong());
                 break;
             case 'D':
-                stack.pushDouble(slots.getDouble(slotId));
+                slots.setDouble(slotId, stack.popDouble());
                 break;
             case 'L':
             case '[':
-                stack.pushRef(slots.getRef(slotId));
+                slots.setRef(slotId, stack.popRef());
                 break;
             default:
                 break;
         }
+
+
     }
 }
