@@ -17,8 +17,6 @@ public class Field {
         ConstantValueAttribute attribute = memberInfo.getConstantValueAttribute();
         if(attribute != null){
             this.constValueIndex = attribute.getConstantValueIndex();
-        }else {
-            System.out.println("ConstantValueAttribute null");
         }
     }
 

@@ -9,4 +9,12 @@ import lombok.Setter;
 public class Slot {
     private int num;
     private Object ref;
+
+    @Override
+    public String toString() {
+        return "Slot{" +
+                "num=" + num +
+                ", ref=" + ref +
+                '}';
+    }
 }

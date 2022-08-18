@@ -16,9 +16,11 @@ public class Method {
     Method(Class _class, MemberInfo memberInfo){
         classMember = new ClassMember(memberInfo, _class);
         CodeAttribute codeAttribute = memberInfo.getCodeAttribute();
-        this.maxLocals = codeAttribute.getMaxLocals();
-        this.code = codeAttribute.getCode();
-        this.maxStack = codeAttribute.getMaxStack();
+        if(codeAttribute != null){
+            this.maxLocals = codeAttribute.getMaxLocals();
+            this.code = codeAttribute.getCode();
+            this.maxStack = codeAttribute.getMaxStack();
+        }
     }
 
     public static Method[] getMethods(Class _class, MemberInfo[] cfMethods){

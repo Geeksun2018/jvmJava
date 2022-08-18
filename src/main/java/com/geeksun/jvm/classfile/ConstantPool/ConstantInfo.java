@@ -52,9 +52,9 @@ public interface ConstantInfo {
             case CONSTANT_Utf8:
                 return new ConstantUTF8Info(classReader);
             case CONSTANT_String:
-                return new ConstantStringInfo(classReader);
+                return new ConstantStringInfo(constantPool, classReader);
             case CONSTANT_Class:
-                return new ConstantClassInfo(classReader);
+                return new ConstantClassInfo(constantPool, classReader);
             case CONSTANT_FieldRef:
                 return new ConstantFieldRefInfo(constantPool, classReader);
             case  CONSTANT_MethodRef:

@@ -7,7 +7,8 @@ public class ConstantClassInfo implements ConstantInfo{
     private ConstantPool constantPool;
     private int nameIndex;
 
-    public ConstantClassInfo(ClassReader classReader){
+    public ConstantClassInfo(ConstantPool constantPool, ClassReader classReader){
+        this.constantPool = constantPool;
         this.nameIndex = classReader.nextU2toInteger();
     }
 

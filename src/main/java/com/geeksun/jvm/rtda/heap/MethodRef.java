@@ -1,7 +1,11 @@
 package com.geeksun.jvm.rtda.heap;
 
 import com.geeksun.jvm.classfile.ConstantPool.ConstantMethodRefInfo;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class MethodRef {
     private MemberRef memberRef;
     private Method method;

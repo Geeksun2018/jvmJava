@@ -16,7 +16,7 @@ public class ClassLoader {
     private Classpath classpath;
     private Map<String, Class> classMap;
 
-    ClassLoader(Classpath classpath){
+    public ClassLoader(Classpath classpath){
         this.classpath = classpath;
         classMap = new HashMap<>();
     }
@@ -32,7 +32,7 @@ public class ClassLoader {
         byte[] data = classpath.readClass(name);
         Class _class = defineClass(data);
         link(_class);
-        return null;
+        return _class;
     }
 
     private void link(Class aClass) {

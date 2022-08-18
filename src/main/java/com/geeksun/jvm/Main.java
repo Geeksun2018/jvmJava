@@ -4,6 +4,9 @@ import com.geeksun.jvm.classfile.ClassFile;
 import com.geeksun.jvm.classfile.ConstantPool.MemberInfo;
 import com.geeksun.jvm.classpath.Classpath;
 import com.geeksun.jvm.rtda.Frame;
+import com.geeksun.jvm.rtda.heap.Class;
+import com.geeksun.jvm.rtda.heap.ClassLoader;
+import com.geeksun.jvm.rtda.heap.Method;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -61,14 +64,22 @@ public class Main {
     public static void startJVM(Cmd cmd){
         Classpath cp = new Classpath(cmd.getXjreOption(), cmd.getCpOption());
         String className = cmd.getClassName().replace(".", "/");
-        ClassFile classFile = new ClassFile(cp.readClass(className));
-        MemberInfo mainMethod = getMainMethod(classFile);
+        ClassLoader classLoader = new ClassLoader(cp);
+        Class mainClass = classLoader.loadClass(className);
+        Method mainMethod = mainClass.getMainMethod();
         Interpreter interpreter = new Interpreter();
-        if(mainMethod == null){
-            System.out.println("null main method");
-        }else{
+        if(mainMethod != null){
             interpreter.interpret(mainMethod);
+        }else{
+            System.out.println("Main method not found");
         }
+//
+//        Interpreter interpreter = new Interpreter();
+//        if(mainMethod == null){
+//            System.out.println("null main method");
+//        }else{
+//            interpreter.interpret(mainMethod);
+//        }
 
     }
 

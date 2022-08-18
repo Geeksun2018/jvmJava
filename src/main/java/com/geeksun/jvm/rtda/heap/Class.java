@@ -36,6 +36,7 @@ public class Class {
         MemberInfo[] fieldInfos = classFile.getFields();
         this.fields = new Field[fieldInfos.length];
         MemberInfo[] methodInfos = classFile.getMethods();
+        this.methods = new Method[methodInfos.length];
         for(int i = 0;i < fieldInfos.length;i++){
             this.fields[i] = new Field(this, fieldInfos[i]);
         }
@@ -88,14 +89,17 @@ public class Class {
         return this.isPublic() || this.getPackageName().equals(other.getPackageName());
     }
 
-    public Class getStaticMethod(String name, String descriptor){
-//        for(Method method:this.methods){
-//
-//        }
+    public Method getStaticMethod(String name, String descriptor){
+        for(Method method:this.methods){
+            if(method.getClassMember().isStatic()&&method.getClassMember().getName().equals(name)
+            &&method.getClassMember().getDescriptor().equals(descriptor)){
+                return method;
+            }
+        }
         return null;
     }
 
-    public Class getMainMethod(){
+    public Method getMainMethod(){
         return this.getStaticMethod("main", "([Ljava/lang/String;)V");
     }
 

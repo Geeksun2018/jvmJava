@@ -17,10 +17,11 @@ public class Frame {
 
     private int nextPc;
 
-    public Frame(Thread thread, int maxLocals, int maxStack){
+    public Frame(Thread thread, Method method){
         this.thread =thread;
-        localVars = new LocalVars(maxLocals);
-        operandStack = new OperandStack(maxStack);
+        this.method = method;
+        localVars = new LocalVars(method.getMaxLocals());
+        operandStack = new OperandStack(method.getMaxStack());
     }
 
 }

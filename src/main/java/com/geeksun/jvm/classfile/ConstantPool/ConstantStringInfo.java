@@ -6,7 +6,8 @@ public class ConstantStringInfo implements ConstantInfo{
     private ConstantPool constantPool;
     private int stringIndex;
 
-    public ConstantStringInfo(ClassReader classReader){
+    public ConstantStringInfo(ConstantPool constantPool, ClassReader classReader){
+        this.constantPool = constantPool;
         this.stringIndex = classReader.nextU2toInteger();
     }
 

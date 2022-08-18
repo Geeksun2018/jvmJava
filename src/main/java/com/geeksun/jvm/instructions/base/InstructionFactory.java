@@ -10,6 +10,7 @@ import com.geeksun.jvm.instructions.extended.IfNull;
 import com.geeksun.jvm.instructions.extended.Wide;
 import com.geeksun.jvm.instructions.loads.*;
 import com.geeksun.jvm.instructions.math.*;
+import com.geeksun.jvm.instructions.references.*;
 import com.geeksun.jvm.instructions.stack.*;
 import com.geeksun.jvm.instructions.stores.*;
 import com.sun.org.apache.bcel.internal.generic.FADD;
@@ -214,6 +215,15 @@ public class InstructionFactory {
         putInstruction(new LStore2());
         putInstruction(new LStore3());
 
+        putInstruction(new CheckCast());
+        putInstruction(new GetStatic());
+        putInstruction(new GetField());
+        putInstruction(new InstanceOf());
+        putInstruction(new New());
+        putInstruction(new PutStatic());
+        putInstruction(new PutField());
+        putInstruction(new InvokeSpecial());
+        putInstruction(new InvokeVirtual());
     }
 
     public static Instruction getByOpCode(int opCode){

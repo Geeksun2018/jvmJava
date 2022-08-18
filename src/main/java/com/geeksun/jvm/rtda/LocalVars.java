@@ -14,6 +14,15 @@ public class LocalVars {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Slot localVar : localVars) {
+            sb.append(localVar).append(" ");
+        }
+        return sb.toString();
+    }
+
     public void setInt(int index, int val){
         localVars[index].setNum(val);
     }
