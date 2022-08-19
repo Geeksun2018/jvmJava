@@ -13,6 +13,8 @@ public class Method {
     private int maxLocals;
     private byte[] code;
 
+    private int argSlotCount;
+
     Method(Class _class, MemberInfo memberInfo){
         classMember = new ClassMember(memberInfo, _class);
         CodeAttribute codeAttribute = memberInfo.getCodeAttribute();
@@ -22,6 +24,10 @@ public class Method {
             this.maxStack = codeAttribute.getMaxStack();
         }
     }
+
+//    private int calcArgSlotCount(){
+//
+//    }
 
     public static Method[] getMethods(Class _class, MemberInfo[] cfMethods){
         Method[] methods = new Method[cfMethods.length];

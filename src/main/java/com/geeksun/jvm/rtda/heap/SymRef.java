@@ -28,11 +28,11 @@ public class SymRef {
 
     public void resolveClassRef(){
         Class d = this.cp.get_class();
-       Class c = d.getClassLoader().loadClass(this.className);
-       if(!c.isAccessibleTo(d)){
-           System.out.println("java.lang.IllegalAccessError");
-       }
-       this._class = c;
+        Class c = d.getClassLoader().loadClass(this.className);
+        if(!c.isAccessibleTo(d)){
+            System.out.println("java.lang.IllegalAccessError");
+        }
+        this._class = c;
     }
 
 
