@@ -5,6 +5,8 @@ import com.geeksun.jvm.classfile.ConstantPool.MemberInfo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 public class Method {
@@ -23,11 +25,21 @@ public class Method {
             this.code = codeAttribute.getCode();
             this.maxStack = codeAttribute.getMaxStack();
         }
+        this.calcArgSlotCount();
     }
 
-//    private int calcArgSlotCount(){
-//
-//    }
+    private void calcArgSlotCount(){
+        MethodDescriptorParser methodDescriptorParser = new MethodDescriptorParser(this.classMember.getDescriptor());
+        for(String parameterType:methodDescriptorParser.getParsed().getParameterTypes()){
+            this.argSlotCount++;
+            if(Objects.equals(parameterType, "J")||Objects.equals(parameterType, "D")){
+                this.argSlotCount++;
+            }
+        }
+        if(!this.classMember.isStatic()){
+            this.argSlotCount++;
+        }
+    }
 
     public static Method[] getMethods(Class _class, MemberInfo[] cfMethods){
         Method[] methods = new Method[cfMethods.length];

@@ -11,6 +11,8 @@ public class Return extends NoOperandsInstruction {
 
     @Override
     public void execute(Frame frame) {
-
+        frame.getThread().popFrame();
     }
+
+
 }
