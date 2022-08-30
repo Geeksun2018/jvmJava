@@ -1,5 +1,6 @@
 package com.geeksun.jvm.instructions.references;
 
+import com.geeksun.jvm.instructions.base.BaseMethod;
 import com.geeksun.jvm.instructions.base.Index16Instruction;
 import com.geeksun.jvm.rtda.Frame;
 import com.geeksun.jvm.rtda.heap.Class;
@@ -18,7 +19,11 @@ public class New extends Index16Instruction {
         ConstantPool constantPool = frame.getMethod().getClassMember().get_class().getConstantPool();
         ClassRef classRef = (ClassRef) constantPool.getConstant(this.index);
         Class _class = classRef.getSymRef().resolveClass();
-//      todo: init class
+        if(!_class.isInitStarted()){
+            frame.revertNextPc();
+            BaseMethod.initClass(frame.getThread(), _class);
+            return;
+        }
         if(_class.isInterface()||_class.isAbstract()){
             System.out.println("java.lang.InstantiationError");
         }

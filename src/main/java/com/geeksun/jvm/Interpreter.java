@@ -9,33 +9,55 @@ import com.geeksun.jvm.rtda.Frame;
 import com.geeksun.jvm.rtda.Thread;
 import com.geeksun.jvm.rtda.heap.Method;
 
+import java.nio.file.Paths;
+
 public class Interpreter {
 
-    public void interpret(Method method){
+    public void interpret(Method method, boolean logInst){
         Thread thread = new Thread();
         Frame frame = new Frame(thread,  method);
         thread.pushFrame(frame);
-        loop(thread, method.getCode());
+//        logFrames(thread);
+        loop(thread, logInst);
     }
 
-    public void loop(Thread thread, byte[] byteCode){
-        Frame frame = thread.popFrame();
-        BytecodeReader reader = new BytecodeReader(byteCode, frame.getNextPc());
+    public void loop(Thread thread, boolean logInst){
+        BytecodeReader reader = new BytecodeReader();
         int opCode;
-        do{
+        do {
+            Frame frame = thread.currentFrame();
             int pc = frame.getNextPc();
             thread.setPc(pc);
-            System.out.print("pc:" + pc);
-            reader.reset(byteCode, pc);
-            opCode = reader.readInt8();
-            System.out.print("        opCode: " + opCode);
+
+            reader.reset(frame.getMethod().getCode(), pc);
+            opCode = reader.readUInt8();
             Instruction instruction = InstructionFactory.getByOpCode(opCode);
             instruction.fetchOperands(reader);
             frame.setNextPc(reader.getPc());
+
+//            if (logInst) {
+            logInstruction(frame, instruction);
+//            }
             instruction.execute(frame);
-            System.out.print("        op: " + instruction.getReName());
-            System.out.println("        localVars: " + frame.getLocalVars());
-        }while (opCode != 0xb1);
+        } while (!thread.getStack().isEmpty());
     }
+
+    public void logInstruction(Frame frame, Instruction instruction){
+        Method method = frame.getMethod();
+        String className = method.getClassMember().get_class().getName();
+        String methodName = method.getClassMember().getName();
+        int pc = frame.getThread().getPc();
+        System.out.printf("%s.%s() #%2d %s %s\n",className,methodName,pc,instruction.getReName(),instruction);
+    }
+
+//    public void logFrames(Thread thread){
+//        while(!thread.getStack().isEmpty()){
+//            Frame frame = thread.popFrame();
+//            Method method = frame.getMethod();
+//            String className = method.getClassMember().getName();
+//            System.out.printf(">> pc:%4d %s.%s%s \n", frame.getNextPc(), className,
+//                    method.getClassMember().getName(), method.getClassMember().getDescriptor());
+//        }
+//    }
 
 }

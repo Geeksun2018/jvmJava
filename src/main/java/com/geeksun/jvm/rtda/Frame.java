@@ -24,4 +24,8 @@ public class Frame {
         operandStack = new OperandStack(method.getMaxStack());
     }
 
+    public void revertNextPc(){
+        this.nextPc = this.thread.getPc();
+    }
+
 }

@@ -51,6 +51,10 @@ public class ClassMember {
         return (this.accessFlags&AccessFlags.ACC_STATIC) != 0;
     }
 
+    public boolean isNative(){
+        return (this.accessFlags&AccessFlags.ACC_NATIVE) != 0;
+    }
+
     public boolean isFinal(){
         return (this.accessFlags&AccessFlags.ACC_FINAL) != 0;
     }
@@ -60,4 +64,7 @@ public class ClassMember {
     }
 
 
+    public boolean isAbstract() {
+        return (this.accessFlags&AccessFlags.ACC_ABSTRACT) != 0;
+    }
 }

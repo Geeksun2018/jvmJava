@@ -8,7 +8,7 @@ import com.geeksun.jvm.rtda.Slot;
 public class Dup_x1 extends NoOperandsInstruction {
     @Override
     public int getOpCode() {
-        return 0x59;
+        return 0x5a;
     }
 
     @Override

@@ -96,9 +96,13 @@ public class MethodDescriptorParser {
             case 'Z':
                 return "Z";
             case 'L':
-//                return this.pa
+                return this.parseObjectType();
+            case '[':
+                return this.parseArrayType();
+            default:
+                this.unreadUint8();
+                return "";
         }
-        return "";
     }
 
     public String parseObjectType(){

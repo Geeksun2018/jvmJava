@@ -2,10 +2,12 @@ package com.geeksun.jvm.instructions.base;
 
 import com.geeksun.jvm.util.Utils;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class BytecodeReader {
     byte[] code;
     int pc;
@@ -23,6 +25,10 @@ public class BytecodeReader {
     public int readInt8(){
         int b1 = code[pc++];
         return b1 & 0xff;
+    }
+
+    public int readUInt8(){
+        return Utils.byteToInteger(new byte[]{code[pc++]});
     }
 
     public int readInt16(){

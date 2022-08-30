@@ -224,6 +224,9 @@ public class InstructionFactory {
         putInstruction(new PutField());
         putInstruction(new InvokeSpecial());
         putInstruction(new InvokeVirtual());
+        putInstruction(new InvokeStatic());
+        putInstruction(new InvokeInterface());
+
     }
 
     public static Instruction getByOpCode(int opCode){

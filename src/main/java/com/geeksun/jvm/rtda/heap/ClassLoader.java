@@ -14,9 +14,11 @@ import java.util.Map;
 @Setter
 public class ClassLoader {
     private Classpath classpath;
+    private boolean verboseFlag;
     private Map<String, Class> classMap;
 
-    public ClassLoader(Classpath classpath){
+    public ClassLoader(Classpath classpath, boolean verboseFlag){
+        this.verboseFlag = verboseFlag;
         this.classpath = classpath;
         classMap = new HashMap<>();
     }
@@ -32,6 +34,9 @@ public class ClassLoader {
         byte[] data = classpath.readClass(name);
         Class _class = defineClass(data);
         link(_class);
+        if(this.verboseFlag){
+            System.out.printf("[Loaded %s]\n", name);
+        }
         return _class;
     }
 

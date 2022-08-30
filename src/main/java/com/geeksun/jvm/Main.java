@@ -64,22 +64,15 @@ public class Main {
     public static void startJVM(Cmd cmd){
         Classpath cp = new Classpath(cmd.getXjreOption(), cmd.getCpOption());
         String className = cmd.getClassName().replace(".", "/");
-        ClassLoader classLoader = new ClassLoader(cp);
+        ClassLoader classLoader = new ClassLoader(cp, cmd.isVerboseClassFlag());
         Class mainClass = classLoader.loadClass(className);
         Method mainMethod = mainClass.getMainMethod();
         Interpreter interpreter = new Interpreter();
         if(mainMethod != null){
-            interpreter.interpret(mainMethod);
+            interpreter.interpret(mainMethod, cmd.isVerboseInstFlag());
         }else{
             System.out.println("Main method not found");
         }
-//
-//        Interpreter interpreter = new Interpreter();
-//        if(mainMethod == null){
-//            System.out.println("null main method");
-//        }else{
-//            interpreter.interpret(mainMethod);
-//        }
 
     }
 

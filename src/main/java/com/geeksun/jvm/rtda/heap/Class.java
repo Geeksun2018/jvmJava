@@ -26,6 +26,7 @@ public class Class {
     private int instanceSlotCount;
     private int staticSlotCount;
     private LocalVars staticVars;
+    boolean initStarted;
 
     Class(ClassFile classFile){
         this.accessFlags = classFile.getAccessFlags();
@@ -103,6 +104,10 @@ public class Class {
         return this.getStaticMethod("main", "([Ljava/lang/String;)V");
     }
 
+    public Method getClInitMethod(){
+        return this.getStaticMethod("<clinit>","()V");
+    }
+
     public Object getObject(){
         return new Object(this);
     }
@@ -140,4 +145,11 @@ public class Class {
         return false;
     }
 
+    public void startInit() {
+        this.initStarted = true;
+    }
+
+    public boolean isSuperClassOf(Class other) {
+        return other.isSubClassOf(this);
+    }
 }

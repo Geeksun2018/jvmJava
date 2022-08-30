@@ -68,4 +68,8 @@ public class LocalVars {
         return localVars[index].getRef();
     }
 
+    public void setSlot(int index, Slot slot){
+        localVars[index] = slot;
+    }
+
 }

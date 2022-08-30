@@ -66,11 +66,14 @@ public class ClassFile {
     }
 
     public String getClassName(){
-        return constantPool.getClassName(superClass);
+        return constantPool.getClassName(this.thisClass);
     }
 
     public String getSuperClassName(){
-        return constantPool.getClassName(this.superClass);
+        if(this.superClass > 0){
+            return constantPool.getClassName(this.superClass);
+        }
+        return "";
     }
 
     public String[] getInterfaceNames(){
