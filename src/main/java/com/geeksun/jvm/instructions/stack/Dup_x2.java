@@ -21,6 +21,6 @@ public class Dup_x2 extends NoOperandsInstruction {
         stack.pushSlot(slot1);
         stack.pushSlot(slot3);
         stack.pushSlot(slot2);
-        stack.pushSlot(slot1);
+        stack.pushSlot(new Slot(slot1.getNum(), slot1.getRef()));
     }
 }

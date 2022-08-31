@@ -41,7 +41,7 @@ public class InterfaceMethodRef {
 
     public Method lookupInterfaceMethod(Class iface, String name, String descriptor){
         for(Method method1:iface.getMethods()){
-            if(method1.getClassMember().getName().equals(name)&&method.getClassMember().getDescriptor().equals(descriptor)){
+            if(method1.getClassMember().getName().equals(name)&&method1.getClassMember().getDescriptor().equals(descriptor)){
                 return method1;
             }
         }

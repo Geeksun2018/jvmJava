@@ -7,7 +7,7 @@ import com.geeksun.jvm.rtda.OperandStack;
 public class Pop2 extends NoOperandsInstruction {
 
     public int getOpCode(){
-        return 0x57;
+        return 0x58;
     }
 
     @Override
